@@ -20,3 +20,22 @@ class category(TimeStampedModel):
 
     def __str__(self):
         return self.name
+    
+class Topic(TimeStampedModel):
+    category = models.ForeignKey(
+        category,
+        on_delete=models.CASCADE,
+        related_name="topics",
+    )
+
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=220)
+    description = models.TextField(blank=True)
+    order= models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", 'title']
+        unique_together = ("category", "slug")
+
+    def __str__(self):
+        return f"(self.category.name) - {self.title}"
