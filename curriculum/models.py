@@ -8,3 +8,15 @@ class TimeStampedModel(models.Model):
     
     class Meta:
         abstract = True
+
+class category(TimeStampedModel):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=120, unique=True)
+    description = models.TimeField(blank=True)
+    order = models.PositiveBigIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "name"]
+
+    def __str__(self):
+        return self.name
