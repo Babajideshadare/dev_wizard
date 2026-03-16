@@ -68,4 +68,19 @@ class Task(TimeStampedModel):
         ordering = ["order", "id"]
     
     def __str__(self):
-        return f"{self.topic.title}" - "{self.title}"
+        return f"{self.topic.title} - {self.title}"
+    
+class Checker(TimeStampedModel):
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        related_name="checkers",
+    )
+    description = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+
+    def __str__(self):
+        return f"{self.task.title} - {self.description[:50]}"
