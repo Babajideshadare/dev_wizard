@@ -9,7 +9,7 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
-class category(TimeStampedModel):
+class Category(TimeStampedModel):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=120, unique=True)
     description = models.TimeField(blank=True)
@@ -23,7 +23,7 @@ class category(TimeStampedModel):
     
 class Topic(TimeStampedModel):
     category = models.ForeignKey(
-        category,
+        Category,
         on_delete=models.CASCADE,
         related_name="topics",
     )
@@ -48,8 +48,11 @@ class Objective(TimeStampedModel):
     )
     description = models.TextField()
     order = models.PositiveIntegerField(default=0)
+
+
     class Meta:
         ordering = ["order", "id"]
+
     def __str__(self):
         return self.description[:80]
     
