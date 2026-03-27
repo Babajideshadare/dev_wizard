@@ -12,7 +12,7 @@ class TimeStampedModel(models.Model):
 class Category(TimeStampedModel):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=120, unique=True)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True)  
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
