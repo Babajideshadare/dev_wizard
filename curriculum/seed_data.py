@@ -441,6 +441,274 @@ CURRICULUM = {
                         },
                     ],
                 },
+
+                  {
+                    "title": "Programming Paradigms & Exception handling",
+                    "slug": "programming-paradigms-and-exception-handling",
+                    "description": (
+                        "Understand core OOP concepts, how to handle exceptions robustly, and how to "
+                        "write basic unit tests using Python's unittest module."
+                    ),
+                    "order": 4,
+                    "objectives": [
+                        "Explain the core concepts of OOP: classes, objects, encapsulation, and abstraction.",
+                        "Discuss the significance of OOP in software development and its advantages over other programming paradigms.",
+                        "Define classes and create objects in Python.",
+                        "Understand the difference between class attributes, instance methods, and the role of the self keyword within classes.",
+                        "Differentiate between syntax errors and exceptions in Python.",
+                        "Identify common Python exceptions and understand their causes.",
+                        "Utilize try, except, else, and finally blocks to handle exceptions effectively.",
+                        "Raise exceptions using the raise keyword and create custom exceptions for specific errors in your code.",
+                        "Explain the importance of testing in software development.",
+                        "Describe different types of testing, with a focus on unit testing.",
+                        "Write basic unit tests using Python’s unittest module to verify the functionality of your code.",
+                        "Structure test cases effectively and understand how test runners work.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Create a Simple Bank Account Class",
+                            "instructions": (
+                                "Create a BankAccount class and a CLI interface to perform basic banking operations.\n\n"
+                                "bank_account.py:\n"
+                                "- Define class BankAccount.\n"
+                                "- __init__(self, initial_balance=0): initialize an account_balance attribute.\n"
+                                "- Implement deposit(amount): add amount to account_balance.\n"
+                                "- Implement withdraw(amount): if sufficient funds, subtract and return True; otherwise return False.\n"
+                                "- Implement display_balance(): print current balance in a user-friendly format.\n\n"
+                                "main-0.py:\n"
+                                "- Uses command line arguments to interact with BankAccount.\n"
+                                "- Example skeleton uses: python main-0.py <command>:<amount> with commands deposit, withdraw, display.\n"
+                                "- You must ensure BankAccount behaves correctly for deposits, withdrawals, and balance display.\n"
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks files bank_account.py and main-0.py exist and are not empty",
+                                "Checks for implementation of class BankAccount",
+                                "Checks for initialization of BankAccount with an account_balance",
+                                "Checks for deposit and withdraw methods",
+                                "Checks for implementation of display_balance method",
+                                "Checks for correct output when depositing",
+                                "Checks for correct output when withdrawing with sufficient funds",
+                                "Checks for correct output when withdrawing more than the balance",
+                                "Checks for correct output when displaying balance",
+                            ],
+                        },
+                        {
+                            "title": "1. Robust Division Calculator with Command Line Arguments",
+                            "instructions": (
+                                "Create robust_division_calculator.py and main.py to perform safe division with error handling.\n\n"
+                                "robust_division_calculator.py:\n"
+                                "- Define function safe_divide(numerator, denominator).\n"
+                                "- Attempt to convert numerator and denominator to floats.\n"
+                                "- Use try/except to handle:\n"
+                                "  * ValueError when inputs are non-numeric: return 'Error: Please enter numeric values only.'\n"
+                                "  * ZeroDivisionError when denominator is zero: return 'Error: Cannot divide by zero.'\n"
+                                "- On success, return a message: 'The result of the division is X'.\n\n"
+                                "main.py:\n"
+                                "- Imports safe_divide.\n"
+                                "- Expects exactly two command line arguments: numerator and denominator.\n"
+                                "- Calls safe_divide and prints the returned message.\n"
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks if robust_division_calculator.py and main.py exist and are not empty",
+                                "Checks for definition of safe_divide function",
+                                "Checks for try/except blocks implementation",
+                                "Checks for conversion of inputs into floats",
+                                "Checks for ZeroDivisionError handling",
+                                "Checks for ValueError handling for non-numeric inputs",
+                                "Checks for correct output message for normal division",
+                                "Checks for correct output message for division by zero",
+                                "Checks for correct output message for non-numeric values",
+                            ],
+                        },
+                        {
+                            "title": "2. Writing Unit Tests for a Simple Calculator Class",
+                            "instructions": (
+                                "Write unit tests for the provided SimpleCalculator class in simple_calculator.py.\n\n"
+                                "Provided: simple_calculator.py with class SimpleCalculator supporting add, subtract, multiply, divide.\n"
+                                "Your task: create test_simple_calculator.py and write unittest-based tests.\n\n"
+                                "Guidelines:\n"
+                                "- Import unittest and SimpleCalculator.\n"
+                                "- Define class TestSimpleCalculator(unittest.TestCase).\n"
+                                "- Implement setUp() to create self.calc = SimpleCalculator().\n"
+                                "- Write test methods:\n"
+                                "  * test_addition\n"
+                                "  * test_subtraction\n"
+                                "  * test_multiply\n"
+                                "  * test_divide (including division by zero, expecting None).\n"
+                                "- Use assertions like self.assertEqual to verify results.\n"
+                                "- Run tests with: python -m unittest test_simple_calculator.py.\n"
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that test_simple_calculator.py exists and is not empty",
+                                "Checks for necessary imports: unittest and SimpleCalculator",
+                                "Checks for definition of a TestSimpleCalculator test class",
+                                "Checks for test_addition test cases",
+                                "Checks for test_subtraction test cases",
+                                "Checks for test_multiply test cases",
+                                "Checks for test_divide test cases (including division by zero)",
+                            ],
+                        },
+                        {
+                            "title": "3. Implementing Basic OOP for a Library Management System",
+                            "instructions": (
+                                "Implement a simple library management system using OOP in library_management.py.\n\n"
+                                "Requirements:\n"
+                                "- Implement class Book with public attributes title and author, and a private attribute _is_checked_out.\n"
+                                "- Book should provide methods to check a book out and return it (updating _is_checked_out).\n"
+                                "- Implement class Library with a private list _books to store Book instances.\n"
+                                "- Library methods:\n"
+                                "  * add_book(book): add a Book instance to the collection.\n"
+                                "  * check_out_book(title): mark the book with the given title as checked out (if available).\n"
+                                "  * return_book(title): mark the book with the given title as returned.\n"
+                                "  * list_available_books(): print available books in 'Title by Author' format.\n\n"
+                                "Provided main.py sets up a small library, checks out and returns a book, and prints the available books."
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that library_management.py exists and is not empty",
+                                "Checks for successful creation of classes Library and Book",
+                                "Checks for initialization of the library's internal collection",
+                                "Checks for methods in Book class to check out and return a book",
+                                "Checks for methods in Library class: add_book, check_out_book, return_book",
+                                "Checks for list_available_books method in Library",
+                            ],
+                        },
+                    ],
+                },
+
+                {
+                    "title": "More about OOP",
+                    "slug": "more-about-oop",
+                    "description": (
+                        "Explore advanced OOP concepts in Python, including magic methods, inheritance vs composition, "
+                        "polymorphism, and class vs static methods."
+                    ),
+                    "order": 5,
+                    "objectives": [
+                        "Describe the functionalities of constructors (__init__), destructors (__del__), and common magic methods (e.g., __str__, __repr__) in Python classes.",
+                        "Implement inheritance to create new classes that inherit properties and methods from existing classes.",
+                        "Utilize composition as an alternative to inheritance for building complex objects.",
+                        "Explain the concepts of single, multiple, and multilevel inheritance in Python.",
+                        "Understand the method resolution order (MRO) in Python and how it affects method calls in inheritance hierarchies.",
+                        "Implement polymorphism and method overriding to create flexible and reusable code.",
+                        "Explain and use Python’s duck typing to achieve polymorphic behavior.",
+                        "Distinguish between class methods and static methods based on their usage and purpose.",
+                        "Apply @classmethod and @staticmethod decorators appropriately in your Python classes.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Dive into Python Magic Methods",
+                            "instructions": (
+                                "Create a script named book_class.py and define a Book class that demonstrates key magic methods.\n\n"
+                                "Requirements for Book class in book_class.py:\n"
+                                "- Attributes: title (str), author (str), year (int).\n"
+                                "- __init__(self, title, author, year): initialize the attributes.\n"
+                                "- __del__(self): print 'Deleting <title>' when the object is deleted.\n"
+                                "- __str__(self): return '<title> by <author>, published in <year>'.\n"
+                                "- __repr__(self): return a recreatable representation like: "
+                                "Book('1984', 'George Orwell', 1949).\n\n"
+                                "Provided main.py imports Book, instantiates it, prints it with str() and repr(), "
+                                "and then deletes it to trigger __del__."
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks book_class.py and main.py files exist and are not empty",
+                                "Checks for successful creation of class Book",
+                                "Checks for proper initialization of Book attributes",
+                                "Checks for implementation of magic methods __init__, __del__, __str__, and __repr__",
+                                "Checks for correct string and repr output",
+                            ],
+                        },
+                        {
+                            "title": "1. Mastering Inheritance and Composition in Python",
+                            "instructions": (
+                                "Develop library_system.py and a main.py to demonstrate inheritance and composition.\n\n"
+                                "library_system.py:\n"
+                                "- Base class Book with attributes title and author; __init__(self, title, author).\n"
+                                "- Derived class EBook(Book) with additional attribute file_size (int) and its own __init__ "
+                                "that calls super().__init__(title, author).\n"
+                                "- Derived class PrintBook(Book) with additional attribute page_count (int) and its own __init__.\n"
+                                "- Library class using composition:\n"
+                                "  * Attribute books: a list to store Book/EBook/PrintBook instances.\n"
+                                "  * add_book(self, book): add a book instance to the list.\n"
+                                "  * list_books(self): print details of each book, e.g.:\n"
+                                "    - Book: Pride and Prejudice by Jane Austen\n"
+                                "    - EBook: Snow Crash by Neal Stephenson, File Size: 500KB\n"
+                                "    - PrintBook: The Catcher in the Rye by J.D. Salinger, Page Count: 234\n\n"
+                                "main.py imports Book, EBook, PrintBook, Library, creates instances, adds them to Library, "
+                                "and calls list_books()."
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks library_system.py and main.py files exist and are not empty",
+                                "Checks for implementation of base class Book and derived classes EBook and PrintBook",
+                                "Checks for correct initialization of Book and derived classes",
+                                "Checks for implementation of EBook-specific attribute file_size",
+                                "Checks for implementation of PrintBook-specific attribute page_count",
+                                "Checks for implementation of Library class and its methods add_book and list_books",
+                                "Checks for correct output when listing books",
+                            ],
+                        },
+                        {
+                            "title": "2. Exploring Polymorphism and Method Overriding",
+                            "instructions": (
+                                "Create polymorphism_demo.py to demonstrate polymorphism with a Shape hierarchy.\n\n"
+                                "polymorphism_demo.py:\n"
+                                "- Base class Shape with method area(self) that raises NotImplementedError.\n"
+                                "- Derived class Rectangle(Shape): attributes length and width; override area() to return length * width.\n"
+                                "- Derived class Circle(Shape): attribute radius; override area() to return math.pi * radius ** 2.\n\n"
+                                "Provided main.py imports Shape, Rectangle, Circle and:\n"
+                                "- Creates shapes = [Rectangle(10, 5), Circle(7)].\n"
+                                "- Loops over shapes and prints: The area of the <ClassName> is: <area>.\n"
+                                "This should show polymorphic behavior via overridden area() methods."
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks polymorphism_demo.py and main.py files exist and are not empty",
+                                "Checks for import of math module",
+                                "Checks for implementation and initialization of Shape, Rectangle, and Circle classes",
+                                "Checks for overriding of area method in Rectangle and Circle",
+                                "Checks for correct area output for Rectangle and Circle",
+                            ],
+                        },
+                        {
+                            "title": "3. Distinguishing Between Class Methods and Static Methods",
+                            "instructions": (
+                                "Create class_static_methods_demo.py with a Calculator class demonstrating @staticmethod and @classmethod.\n\n"
+                                "Calculator class:\n"
+                                "- Class attribute calculation_type = 'Arithmetic Operations'.\n"
+                                "- @staticmethod add(a, b): return a + b.\n"
+                                "- @classmethod multiply(cls, a, b):\n"
+                                "  * Print 'Calculation type: <cls.calculation_type>'.\n"
+                                "  * Return the product a * b.\n\n"
+                                "Provided main.py imports Calculator and:\n"
+                                "- Calls Calculator.add(10, 5) and prints: The sum is: 15\n"
+                                "- Calls Calculator.multiply(10, 5) and prints:\n"
+                                "  Calculation type: Arithmetic Operations\n"
+                                "  The product is: 50\n"
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks class_static_methods_demo.py and main.py files exist and are not empty",
+                                "Checks for implementation of Calculator class",
+                                "Checks for implementation of static method add",
+                                "Checks for implementation of class method multiply using cls and calculation_type",
+                                "Checks for correct output of sum and product including the calculation_type message",
+                            ],
+                        },
+                    ],
+                },
             ],
         },
         
@@ -634,6 +902,524 @@ CURRICULUM = {
                                 "Checks for the insertion of the data with customer_id=4",
                                 "Checks if task_6.sql file is available",
                                 "Checks if task_6.sql file is not empty",
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+
+        {
+            "name": "Django",
+            "slug": "django",
+            "description": "Introduction to Django: environment setup, models, and admin interface.",
+            "order": 3,
+            "topics": [
+                {
+                    "title": "Introduction to Django",
+                    "slug": "introduction-to-django",
+                    "description": "Set up a Django project, create models, perform CRUD with the ORM, and use the Django admin.",
+                    "order": 1,
+                    "objectives": [
+                        "Install Django and create a new Django project.",
+                        "Familiarize yourself with the project’s default structure and run the development server.",
+                        "Create a Django app.",
+                        "Define Django models with specified attributes.",
+                        "Perform and document CRUD operations using Django’s ORM via the Django shell.",
+                        "Register your models with the Django admin.",
+                        "Customize the admin interface to enhance the management and visibility of your data.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Introduction to Django Development Environment Setup",
+                            "instructions": (
+                                "Install Django and create a new Django project named LibraryProject.\n\n"
+                                "Steps:\n"
+                                "- Ensure Python is installed.\n"
+                                "- Install Django with: pip install django.\n"
+                                "- Create a project: django-admin startproject LibraryProject.\n"
+                                "- Navigate into LibraryProject.\n"
+                                "- Create a README.md file inside LibraryProject and describe the project.\n"
+                                "- Run the dev server: python manage.py runserver.\n"
+                                "- Open http://127.0.0.1:8000/ and confirm the Django welcome page.\n"
+                                "- Explore manage.py, settings.py, and urls.py to understand their roles."
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for a non-empty README.md file within the LibraryProject directory",
+                                "Check for the existence of manage.py file in the right location",
+                                "Checks for the existence of settings-related file (settings.py) in the right location",
+                                "Checks the content of the settings.py file",
+                            ],
+                        },
+                        {
+                            "title": "1. Implementing and Interacting with Django Models",
+                            "instructions": (
+                                "Within LibraryProject, create an app named bookshelf and define a Book model.\n\n"
+                                "Steps:\n"
+                                "- In the project directory, run: python manage.py startapp bookshelf.\n"
+                                "- In bookshelf/models.py, define a Book model with fields:\n"
+                                "  * title = CharField(max_length=200)\n"
+                                "  * author = CharField(max_length=100)\n"
+                                "  * publication_year = IntegerField()\n"
+                                "- Add 'bookshelf' to INSTALLED_APPS in settings.py.\n"
+                                "- Run: python manage.py makemigrations bookshelf\n"
+                                "- Run: python manage.py migrate\n"
+                                "- Open Django shell: python manage.py shell and perform CRUD:\n"
+                                "  * Create a Book: title='1984', author='George Orwell', publication_year=1949.\n"
+                                "  * Retrieve and display it.\n"
+                                "  * Update the title to 'Nineteen Eighty-Four'.\n"
+                                "  * Delete the book.\n"
+                                "- Document each operation and its output in separate files: create.md, retrieve.md, update.md, delete.md.\n"
+                                "- Optionally, summarize all operations in CRUD_operations.md."
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Check if Book model is defined in bookshelf/models.py",
+                                "Check if Book model has required fields: title, author, publication_year",
+                                "Check that create.md exists and contains create commands and output",
+                                "Check that retrieve.md exists and contains retrieve commands and output",
+                                "Check that update.md exists and contains update commands and output",
+                                "Check that delete.md exists and contains delete commands and output",
+                            ],
+                        },
+                        {
+                            "title": "2. Utilizing the Django Admin Interface",
+                            "instructions": (
+                                "Register the Book model in the Django admin and customize its list display.\n\n"
+                                "Steps:\n"
+                                "- In bookshelf/admin.py, import Book and register it with admin.\n"
+                                "- Configure a ModelAdmin so that the list view displays: title, author, publication_year.\n"
+                                "- Add list_filter for publication_year or author to filter books.\n"
+                                "- Add search_fields for title and author to allow searching.\n"
+                                "- Run the server, log into /admin/, and verify that Book entries are visible and manageable."
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Check for bookshelf/admin.py file existence",
+                                "Check for Book model registration in the admin",
+                                "Check for list_filter configuration on the Book admin",
+                                "Check for search_fields configuration on the Book admin",
+                            ],
+                        },
+                    ],
+                },
+
+                {
+                    "title": "Django Models and Views",
+                    "slug": "django-models-and-views",
+                    "description": (
+                        "Work with advanced Django model relationships, build views and URL configurations, "
+                        "and implement authentication, role-based access control, and custom permissions."
+                    ),
+                    "order": 2,
+                    "objectives": [
+                        "Master Django’s ORM capabilities by creating models that demonstrate ForeignKey, ManyToMany, and OneToOne relationships.",
+                        "Effectively model complex data relationships in a Django project.",
+                        "Gain proficiency in creating function-based and class-based views in Django.",
+                        "Configure URL patterns to handle web requests effectively, routing them to the appropriate views.",
+                        "Set up user login, logout, and registration functionalities using Django’s built-in authentication system.",
+                        "Develop views and templates to demonstrate user session and permission management.",
+                        "Extend the Django User model to include user roles and create views that restrict access based on these roles.",
+                        "Utilize Django signals to automatically create a UserProfile when a new user is registered.",
+                        "Add custom permissions to the Book model to control actions such as adding, editing, and deleting entries based on user roles.",
+                        "Enforce these permissions in views, ensuring only authorized users can perform specific actions.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Implementing Advanced Model Relationships in Django",
+                            "instructions": (
+                                "Create a new app relationship_app in your Django project and define models using "
+                                "ForeignKey, ManyToMany, and OneToOne fields.\n\n"
+                                "Models in relationship_app/models.py:\n"
+                                "- Author: name (CharField)\n"
+                                "- Book: title (CharField), author (ForeignKey to Author)\n"
+                                "- Library: name (CharField), books (ManyToManyField to Book)\n"
+                                "- Librarian: name (CharField), library (OneToOneField to Library)\n\n"
+                                "Run migrations for relationship_app, then create a script query_samples.py in the "
+                                "relationship_app directory that demonstrates queries to:\n"
+                                "- Query all books by a specific author.\n"
+                                "- List all books in a library.\n"
+                                "- Retrieve the librarian for a library.\n"
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for implementation of Author model",
+                                "Checks for implementation of Book model",
+                                "Checks for implementation of Library model with ManyToMany to Book",
+                                "Checks for implementation of Librarian model with OneToOne to Library",
+                                "Checks for existence of query_samples.py file",
+                                "Checks for 'Query all books by a specific author' query",
+                                "Checks for 'List all books in a library' query",
+                                "Checks for 'Retrieve the librarian for a library' query",
+                            ],
+                        },
+                        {
+                            "title": "1. Django Views and URL Configuration",
+                            "instructions": (
+                                "In relationship_app, add views and URLs to display information about books and libraries.\n\n"
+                                "Views in relationship_app/views.py:\n"
+                                "- Function-based view to list all books (titles and authors) from the database.\n"
+                                "  * Optionally render list_books.html template with context variable 'books'.\n"
+                                "- Class-based view (ListView or DetailView) to display details for a specific library, "
+                                "including all its books.\n"
+                                "  * Optionally render library_detail.html template.\n\n"
+                                "URLs:\n"
+                                "- Create relationship_app/urls.py and define URL patterns for:\n"
+                                "  * The function-based book list view.\n"
+                                "  * The class-based library detail view (e.g. path('library/<int:pk>/', ...)).\n\n"
+                                "Templates (optional but recommended):\n"
+                                "- list_books.html: loops over 'books' and shows title and author.\n"
+                                "- library_detail.html: shows a particular library and its related books."
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for function-based view that renders a list of book titles and their authors",
+                                "Checks for class-based view in relationship_app/views.py that displays library details with its books",
+                                "Checks for use of Django's ListView or DetailView for the class-based view",
+                                "Checks that relationship_app/urls.py routes to both the function-based and class-based views",
+                                "Checks for implementation of list_books.html and library_detail.html templates (or equivalent)",
+                            ],
+                        },
+                        {
+                            "title": "2. Implementing User Authentication in Django",
+                            "instructions": (
+                                "Enhance relationship_app by adding login, logout, and registration functionality using "
+                                "Django's built-in auth system.\n\n"
+                                "Steps:\n"
+                                "- Create views or use Django's built-in auth views for:\n"
+                                "  * User login\n"
+                                "  * User logout\n"
+                                "  * User registration (using UserCreationForm)\n"
+                                "- Create templates in relationship_app/templates/relationship_app/:\n"
+                                "  * login.html\n"
+                                "  * logout.html\n"
+                                "  * register.html\n"
+                                "- Configure URL patterns in relationship_app/urls.py to link to these views.\n"
+                                "- Test that users can register, log in, and log out, and that sessions work correctly."
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that views for login, logout, and registration are implemented using Django's built-in auth tools",
+                                "Checks that URL patterns in relationship_app/urls.py link to the authentication views",
+                                "Checks that provided templates (login.html, logout.html, register.html) are implemented",
+                                "Checks that users can successfully register, log in, and log out",
+                            ],
+                        },
+                        {
+                            "title": "3. Implement Role-Based Access Control in Django",
+                            "instructions": (
+                                "Implement role-based access control by extending the User model with a UserProfile and "
+                                "restricting views based on roles.\n\n"
+                                "UserProfile model:\n"
+                                "- user: OneToOneField to Django's User.\n"
+                                "- role: CharField with choices: 'Admin', 'Librarian', 'Member'.\n"
+                                "- Use Django signals (post_save) to automatically create a UserProfile when a User is created.\n\n"
+                                "Role-based views:\n"
+                                "- Implement three role-specific views:\n"
+                                "  * admin_view (for Admin users only)\n"
+                                "  * librarian_view (for Librarian users only)\n"
+                                "  * member_view (for Member users only)\n"
+                                "- Use @user_passes_test to ensure only users with the appropriate role can access each view.\n\n"
+                                "URLs and templates:\n"
+                                "- Define URLs for each role-based view.\n"
+                                "- Create templates:\n"
+                                "  * admin_view.html\n"
+                                "  * librarian_view.html\n"
+                                "  * member_view.html\n"
+                                "to show content tailored to each role."
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for creation of a UserProfile model with OneToOneField to User and role field",
+                                "Checks for use of Django signals to auto-create UserProfile on user registration",
+                                "Checks for admin_view restricted to Admin role",
+                                "Checks for librarian_view restricted to Librarian role",
+                                "Checks for member_view restricted to Member role",
+                                "Checks for use of @user_passes_test decorator to enforce role-based access",
+                            ],
+                        },
+                        {
+                            "title": "4. Implementing Custom Permissions in Django",
+                            "instructions": (
+                                "Extend the Book model in relationship_app with custom permissions and enforce them in views.\n\n"
+                                "Step 1: Book model Meta permissions:\n"
+                                "- Inside the Book model, define a nested Meta class.\n"
+                                "- In Meta, specify a permissions tuple including:\n"
+                                "  * ('can_add_book', 'Can add book')\n"
+                                "  * ('can_change_book', 'Can change book')\n"
+                                "  * ('can_delete_book', 'Can delete book')\n\n"
+                                "Step 2: Permission-protected views:\n"
+                                "- Create or update views to handle adding, editing, and deleting Book instances.\n"
+                                "- Decorate these views with @permission_required using the custom permissions above.\n\n"
+                                "Step 3: URLs:\n"
+                                "- Define URL patterns for add, edit, and delete book views in urls.py.\n"
+                                "- Ensure that only users with the proper permissions can access these views."
+                            ),
+                            "order": 4,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that a nested Meta class is defined inside the Book model",
+                                "Checks that Meta.permissions includes can_add_book, can_change_book, and can_delete_book",
+                                "Checks that views for add, edit, delete books use @permission_required with the custom permissions",
+                                "Checks that urls.py defines paths for the secured book actions",
+                            ],
+                        },
+                    ],
+                },
+
+                 {
+                    "title": "Advanced Features and Security",
+                    "slug": "advanced-features-and-security",
+                    "description": (
+                        "Implement a custom user model, manage permissions and groups, and apply security best practices "
+                        "including HTTPS and secure redirects in a Django project."
+                    ),
+                    "order": 3,
+                    "objectives": [
+                        "Customize Django’s user model to include additional fields and functionality.",
+                        "Configure settings and integrate the custom user model into the Django admin.",
+                        "Implement and manage permissions and groups to control access to various parts of your application.",
+                        "Develop views that enforce these permissions and document the setup process.",
+                        "Configure Django settings to prevent security vulnerabilities and ensure data privacy.",
+                        "Protect views and templates against common security threats such as CSRF, XSS, and SQL injection.",
+                        "Configure Django to handle secure HTTPS connections and enforce HTTPS redirects.",
+                        "Adjust settings for secure cookies and implement secure headers to protect against various attacks.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Implementing a Custom User Model in Django",
+                            "instructions": (
+                                "Replace Django's default user model with a custom user model that includes additional fields.\n\n"
+                                "Steps:\n"
+                                "- Duplicate your existing django-models project to a new project named advanced_features_and_security.\n"
+                                "- Create a custom user model extending AbstractUser with extra fields:\n"
+                                "  * date_of_birth (DateField)\n"
+                                "  * profile_photo (ImageField)\n"
+                                "- In settings.py, set AUTH_USER_MODEL to point to your custom user model.\n"
+                                "- Implement a custom user manager with create_user and create_superuser handling the new fields.\n"
+                                "- Update admin.py with a custom ModelAdmin to manage the custom user model and display the new fields.\n"
+                                "- Update any ForeignKey or references to User in other models to use the new custom user model.\n"
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Check for models.py file existence and custom user model definition",
+                                "Check for custom user manager definition (create_user and create_superuser)",
+                                "Check for custom user admin registration in admin.py",
+                                "Check for settings.py configuration of AUTH_USER_MODEL",
+                            ],
+                        },
+                        {
+                            "title": "1. Managing Permissions and Groups in Django",
+                            "instructions": (
+                                "Implement detailed access control using groups and permissions.\n\n"
+                                "Steps:\n"
+                                "- In one of your models (e.g., Book), add custom permissions in Meta.permissions:\n"
+                                "  * can_view, can_create, can_edit, can_delete\n"
+                                "- In Django admin, create groups such as Editors, Viewers, and Admins.\n"
+                                "- Assign appropriate permissions to each group (e.g., Editors have can_create and can_edit).\n"
+                                "- In views.py, protect views that create, edit, or delete instances using @permission_required decorators.\n"
+                                "- Example: @permission_required('app_name.can_edit', raise_exception=True) for an edit view.\n"
+                                "- Create or update a README.md or comments explaining which permissions and groups exist, "
+                                "how they are set up, and how they are used.\n"
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Check for models.py file existence and custom permissions definition (can_view, can_create, can_edit, can_delete)",
+                                "Check for views.py file existence and use of permission decorators on protected views",
+                                "Check for README.md file existence and content documenting permissions and groups setup",
+                            ],
+                        },
+                        {
+                            "title": "2. Implementing Security Best Practices in Django",
+                            "instructions": (
+                                "Configure security-related settings and code to protect against common web vulnerabilities.\n\n"
+                                "Steps:\n"
+                                "- In settings.py, configure secure settings (for production):\n"
+                                "  * DEBUG = False\n"
+                                "  * SECURE_BROWSER_XSS_FILTER = True\n"
+                                "  * X_FRAME_OPTIONS = 'DENY'\n"
+                                "  * SECURE_CONTENT_TYPE_NOSNIFF = True\n"
+                                "  * CSRF_COOKIE_SECURE = True\n"
+                                "  * SESSION_COOKIE_SECURE = True\n"
+                                "- Ensure all form templates include {% csrf_token %}.\n"
+                                "- In views, avoid raw SQL string concatenation; use Django ORM and forms/validation to prevent SQL injection.\n"
+                                "- Optionally implement a Content Security Policy (CSP) via middleware or custom headers.\n"
+                                "- Document the security measures applied with comments in settings.py, views, or a small security README.\n"
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Check if settings.py contains the necessary security configurations (DEBUG, X_FRAME_OPTIONS, SECURE_* flags)",
+                                "Check if forms.py contains the definition of ExampleForm (if used for secure input handling)",
+                                "Check if views.py imports and uses ExampleForm correctly",
+                                "Check if form_example.html template file exists",
+                                "Check if book_list.html template file exists",
+                            ],
+                        },
+                        {
+                            "title": "3. Implementing HTTPS and Secure Redirects in Django",
+                            "instructions": (
+                                "Configure Django and your deployment environment to enforce HTTPS and secure headers.\n\n"
+                                "Steps:\n"
+                                "- In settings.py, set:\n"
+                                "  * SECURE_SSL_REDIRECT = True\n"
+                                "  * SECURE_HSTS_SECONDS = 31536000 (e.g., one year)\n"
+                                "  * SECURE_HSTS_INCLUDE_SUBDOMAINS = True\n"
+                                "  * SECURE_HSTS_PRELOAD = True\n"
+                                "  * SESSION_COOKIE_SECURE = True\n"
+                                "  * CSRF_COOKIE_SECURE = True\n"
+                                "  * X_FRAME_OPTIONS = 'DENY'\n"
+                                "  * SECURE_CONTENT_TYPE_NOSNIFF = True\n"
+                                "  * SECURE_BROWSER_XSS_FILTER = True\n"
+                                "- Ensure your deployment (e.g., Nginx/Apache) is configured with SSL/TLS certificates.\n"
+                                "- Document the HTTPS configuration and security headers in your deployment notes or README.\n"
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that SECURE_SSL_REDIRECT is set to True",
+                                "Checks that SECURE_HSTS_SECONDS is set to a suitable value (e.g. 31536000)",
+                                "Checks that SECURE_HSTS_INCLUDE_SUBDOMAINS and SECURE_HSTS_PRELOAD are set to True",
+                                "Checks that SESSION_COOKIE_SECURE is set to True",
+                                "Checks that CSRF_COOKIE_SECURE is set to True",
+                                "Checks for secure headers implementation (X_FRAME_OPTIONS, SECURE_CONTENT_TYPE_NOSNIFF, SECURE_BROWSER_XSS_FILTER)",
+                            ],
+                        },
+                    ],
+                }, 
+            ],
+        },
+
+         {
+            "name": "API",
+            "slug": "api",
+            "description": "Building RESTful APIs with Django REST Framework.",
+            "order": 4,
+            "topics": [
+                {
+                    "title": "Building APIs with Django REST Framework",
+                    "slug": "building-apis-with-drf",
+                    "description": (
+                        "Set up a Django project with Django REST Framework, build basic API endpoints, "
+                        "implement CRUD with ViewSets and routers, and secure APIs with authentication and permissions."
+                    ),
+                    "order": 1,
+                    "objectives": [
+                        "Create a new Django project and configure it to use Django REST Framework.",
+                        "Set up a basic environment for API development, including creating models and running migrations.",
+                        "Develop a simple API endpoint to retrieve data using serializers and views in DRF.",
+                        "Understand the core components of DRF, including serializers and generic views.",
+                        "Use DRF’s ViewSets and Routers to simplify the implementation of CRUD operations.",
+                        "Manage standard database operations through RESTful APIs effectively.",
+                        "Secure API endpoints by implementing authentication schemes and permission settings.",
+                        "Ensure only authorized users can access and modify data through the API.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Setting Up a New Django Project with Django REST Framework",
+                            "instructions": (
+                                "Create a new Django project dedicated to API development and configure Django REST Framework.\n\n"
+                                "Steps:\n"
+                                "- If needed, install Django: pip install django.\n"
+                                "- Create a new project named api_project: django-admin startproject api_project.\n"
+                                "- Install DRF: pip install djangorestframework.\n"
+                                "- In api_project/settings.py, add 'rest_framework' to INSTALLED_APPS.\n"
+                                "- From the api_project directory, create an app named api: python manage.py startapp api.\n"
+                                "- Add 'api' to INSTALLED_APPS.\n"
+                                "- In api/models.py, define a Book model with fields title (CharField) and author (CharField).\n"
+                                "- Run migrations: python manage.py makemigrations; python manage.py migrate.\n"
+                                "- Start the dev server: python manage.py runserver and confirm the site loads on http://127.0.0.1:8000/.\n"
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks if 'api' and 'rest_framework' are added in INSTALLED_APPS",
+                                "Checks for the Book model implementation in api/models.py",
+                                "Checks for the installation and registration of the 'api' application",
+                            ],
+                        },
+                        {
+                            "title": "1. Building Your First API Endpoint with Django REST Framework",
+                            "instructions": (
+                                "Create a simple API endpoint to list all Book instances using DRF serializers and generic views.\n\n"
+                                "Steps:\n"
+                                "- In api/serializers.py, define BookSerializer extending serializers.ModelSerializer including all Book fields.\n"
+                                "- In api/views.py, define BookList view extending generics.ListAPIView:\n"
+                                "  * queryset = Book.objects.all()\n"
+                                "  * serializer_class = BookSerializer\n"
+                                "- In api/urls.py, create a URL pattern mapping 'books/' to BookList.as_view(), named 'book-list'.\n"
+                                "- In api_project/urls.py, include the api app URLs with path('api/', include('api.urls')).\n"
+                                "- Test the endpoint at /api/books/ and ensure it returns JSON list of books.\n"
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that api/serializers.py file exists",
+                                "Checks for definition of BookSerializer extending serializers.ModelSerializer with all Book fields",
+                                "Checks that BookList view in api/views.py extends generics.ListAPIView",
+                                "Checks that api/urls.py defines a URL pattern routing to BookList",
+                                "Checks that path() is used to map 'books/' to the view",
+                            ],
+                        },
+                        {
+                            "title": "2. Implementing CRUD Operations with ViewSets and Routers in DRF",
+                            "instructions": (
+                                "Replace or extend the simple list view with a ViewSet to provide full CRUD operations for Book.\n\n"
+                                "Steps:\n"
+                                "- In api/views.py, add a BookViewSet class extending viewsets.ModelViewSet:\n"
+                                "  * queryset = Book.objects.all()\n"
+                                "  * serializer_class = BookSerializer\n"
+                                "- In api/urls.py, import DefaultRouter from rest_framework.routers.\n"
+                                "- Create a router instance and register the BookViewSet with:\n"
+                                "  router.register(r'books_all', BookViewSet, basename='book_all')\n"
+                                "- Include router.urls in urlpatterns, alongside the existing 'books/' path:\n"
+                                "  urlpatterns = [\n"
+                                "      path('books/', BookList.as_view(), name='book-list'),\n"
+                                "      path('', include(router.urls)),\n"
+                                "  ]\n"
+                                "- Test CRUD endpoints (GET, POST, PUT, DELETE) using /api/books_all/ and /api/books_all/<id>/.\n"
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that api/views.py defines BookViewSet extending viewsets.ModelViewSet",
+                                "Checks that BookViewSet is configured to handle CRUD operations (queryset and serializer_class)",
+                                "Checks that api/urls.py imports DefaultRouter and registers BookViewSet",
+                                "Checks that router URLs are included in urlpatterns",
+                            ],
+                        },
+                        {
+                            "title": "3. Implementing Authentication and Permissions in Django REST Framework",
+                            "instructions": (
+                                "Secure API endpoints using token authentication and DRF permission classes.\n\n"
+                                "Steps:\n"
+                                "- In api_project/settings.py, add 'rest_framework.authtoken' to INSTALLED_APPS.\n"
+                                "- Run python manage.py migrate to create token tables.\n"
+                                "- In REST_FRAMEWORK settings, include TokenAuthentication in DEFAULT_AUTHENTICATION_CLASSES.\n"
+                                "- Configure a token retrieval endpoint using DRF's built-in view obtain_auth_token "
+                                "(or equivalent):\n"
+                                "  * e.g. path('api/token/', obtain_auth_token, name='api-token') in urls.\n"
+                                "- In BookViewSet (and/or other viewsets), set permission_classes to include IsAuthenticated "
+                                "or other appropriate permission classes from rest_framework.permissions.\n"
+                                "- Test API calls with and without authentication tokens using a tool like Postman.\n"
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that 'rest_framework.authtoken' is added to INSTALLED_APPS in settings.py",
+                                "Checks that DEFAULT_AUTHENTICATION_CLASSES in REST_FRAMEWORK includes TokenAuthentication",
+                                "Checks that a token retrieval endpoint is configured using obtain_auth_token",
+                                "Checks that viewsets use DRF permission classes (e.g., IsAuthenticated)",
                             ],
                         },
                     ],
