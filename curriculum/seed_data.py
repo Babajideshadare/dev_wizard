@@ -1296,6 +1296,180 @@ CURRICULUM = {
                             ],
                         },
                     ],
+                },
+
+                  {
+                    "title": "Django: Building a Complete Django Application",
+                    "slug": "django-building-complete-application",
+                    "description": (
+                        "Build a full-featured Django blog application with authentication, post management, "
+                        "comments, tagging, and search functionality."
+                    ),
+                    "order": 4,
+                    "objectives": [
+                        "Initialize and configure a new Django project tailored for a blogging platform.",
+                        "Establish the initial models and prepare the base templates.",
+                        "Develop a comprehensive user authentication system, including registration, login, logout, and profile management.",
+                        "Enable CRUD (Create, Read, Update, Delete) operations for blog posts.",
+                        "Allow authenticated users to manage their content dynamically.",
+                        "Implement a comment system to enhance interactivity, allowing users to leave and manage comments on blog posts.",
+                        "Add tagging and search functionalities to improve content organization and discoverability.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Initial Setup and Project Configuration for a Django Blog",
+                            "instructions": (
+                                "Set up a new Django project named django_blog and a blog app, and configure the initial Post model.\n\n"
+                                "Steps:\n"
+                                "- Install Django with pip install django if not already installed.\n"
+                                "- Create project: django-admin startproject django_blog.\n"
+                                "- cd into django_blog and create app: python manage.py startapp blog.\n"
+                                "- Add 'blog' to INSTALLED_APPS in django_blog/settings.py.\n"
+                                "- (Optional) Configure DATABASES in settings.py if using PostgreSQL or another DB instead of SQLite.\n"
+                                "- In blog/models.py, define Post model with fields:\n"
+                                "  * title = models.CharField(max_length=200)\n"
+                                "  * content = models.TextField()\n"
+                                "  * published_date = models.DateTimeField(auto_now_add=True)\n"
+                                "  * author = models.ForeignKey(User, on_delete=models.CASCADE)\n"
+                                "- Run: python manage.py makemigrations blog; python manage.py migrate.\n"
+                                "- Set up static files and templates directories inside the blog app; configure STATIC_URL, TEMPLATES, and STATICFILES_DIRS as needed.\n"
+                                "- Place provided HTML/CSS/JS into the appropriate static and template directories.\n"
+                                "- Run: python manage.py runserver and verify http://127.0.0.1:8000/ loads.\n"
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks if blog app is installed (app created)",
+                                "Checks if 'blog' app is added to INSTALLED_APPS in django_blog/settings.py",
+                                "Checks for implementation of Post model in blog/models.py",
+                                "Checks for database configuration and migrations applied",
+                            ],
+                        },
+                        {
+                            "title": "1. Implementing the Blog's User Authentication System",
+                            "instructions": (
+                                "Add user authentication to django_blog: registration, login, logout, and profile management.\n\n"
+                                "Steps:\n"
+                                "- Use Django's built-in auth views/forms for login and logout.\n"
+                                "- Create custom registration and profile views, extending UserCreationForm to include email (and optionally other fields).\n"
+                                "- Create templates for:\n"
+                                "  * login\n"
+                                "  * registration\n"
+                                "  * logout\n"
+                                "  * user profile (view/edit)\n"
+                                "- Configure URLs in blog/urls.py for /login, /logout, /register, and /profile.\n"
+                                "- Implement profile management to allow authenticated users to view and update their details (e.g. email, profile picture, bio if added).\n"
+                                "- Ensure all forms use {% csrf_token %} and rely on Django's password hashing.\n"
+                                "- Document how the authentication system works and how to test each feature.\n"
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for implementation of authentication views (login, logout, register, profile)",
+                                "Checks for templates for login, registration, logout, and profile pages",
+                                "Checks for URL patterns in blog/urls.py for /login, /logout, /register, and /profile",
+                                "Checks that CSRF tokens are used in authentication forms",
+                                "Checks for documentation of the authentication system",
+                            ],
+                        },
+                        {
+                            "title": "2. Creating Blog Post Management Features",
+                            "instructions": (
+                                "Implement full CRUD for the Post model using class-based views, forms, and templates.\n\n"
+                                "Steps:\n"
+                                "- Use Django's class-based views to implement:\n"
+                                "  * ListView: list all posts\n"
+                                "  * DetailView: show a single post\n"
+                                "  * CreateView: allow authenticated users to create posts\n"
+                                "  * UpdateView: allow authors to edit their posts\n"
+                                "  * DeleteView: allow authors to delete their posts\n"
+                                "- Create a PostForm (ModelForm) to handle creation/updating of posts; author should be set to the logged-in user.\n"
+                                "- Create templates for:\n"
+                                "  * Listing posts (titles + snippet)\n"
+                                "  * Viewing a single post\n"
+                                "  * Creating a post\n"
+                                "  * Editing a post\n"
+                                "  * Deleting a post\n"
+                                "- Configure URLs in blog/urls.py:\n"
+                                "  * /posts/ (list)\n"
+                                "  * /posts/new/\n"
+                                "  * /posts/<int:pk>/\n"
+                                "  * /posts/<int:pk>/edit/\n"
+                                "  * /posts/<int:pk>/delete/\n"
+                                "- Use LoginRequiredMixin so only authenticated users can create posts.\n"
+                                "- Use UserPassesTestMixin (or equivalent logic) to ensure only the author can edit/delete their posts.\n"
+                                "- Test navigation and permissions thoroughly.\n"
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for implementation of CRUD operations for Post using class-based views",
+                                "Checks for updated URLs for listing, viewing, creating, editing, and deleting blog posts",
+                                "Checks for new templates for listing, viewing, creating, editing, and deleting blog posts",
+                                "Checks for use of LoginRequiredMixin and UserPassesTestMixin to ensure only authors can edit or delete posts",
+                            ],
+                        },
+                        {
+                            "title": "3. Adding Comment Functionality to Blog Posts",
+                            "instructions": (
+                                "Add a Comment system to posts, including model, forms, views, templates, and URLs.\n\n"
+                                "Steps:\n"
+                                "- In blog/models.py, define Comment model with fields:\n"
+                                "  * post (ForeignKey to Post)\n"
+                                "  * author (ForeignKey to User)\n"
+                                "  * content (TextField)\n"
+                                "  * created_at (DateTimeField)\n"
+                                "  * updated_at (DateTimeField)\n"
+                                "- Run migrations.\n"
+                                "- Create a CommentForm (ModelForm) to create/update comments.\n"
+                                "- Implement views for comment CRUD:\n"
+                                "  * Display comments under each post (often integrated into the post detail view).\n"
+                                "  * Allow authenticated users to add comments on the post detail page.\n"
+                                "  * Allow comment authors to edit and delete their own comments.\n"
+                                "- Create templates (or integrate into post detail template) for displaying, adding, editing, and deleting comments.\n"
+                                "- Configure URLs, e.g. /posts/<int:post_id>/comments/new/, /comments/<int:pk>/edit/, /comments/<int:pk>/delete/.\n"
+                                "- Ensure only the comment author can edit/delete their comment.\n"
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for implementation of Comment model",
+                                "Checks for CRUD operations for Comment (create, list under a post, edit, delete)",
+                                "Checks for CommentForm (ModelForm) for comment creation and updating",
+                                "Checks for logically structured URLs for comment actions (e.g., /posts/<int:post_id>/comments/new/)",
+                            ],
+                        },
+                        {
+                            "title": "4. Implementing Advanced Features: Tagging and Search Functionality",
+                            "instructions": (
+                                "Add tagging and search features to organize and discover blog posts.\n\n"
+                                "Steps:\n"
+                                "- Tagging:\n"
+                                "  * Implement a Tag model with a name field, or use a package like django-taggit.\n"
+                                "  * Create a many-to-many relationship between Tag and Post.\n"
+                                "  * Run migrations.\n"
+                                "- Forms:\n"
+                                "  * Update PostForm to allow adding/editing tags.\n"
+                                "  * Support creating new tags from the form.\n"
+                                "- Search:\n"
+                                "  * Implement a search view that filters posts by title, content, or tags (using Q objects).\n"
+                                "  * Add a search bar in templates and a search results page.\n"
+                                "- Templates & URLs:\n"
+                                "  * Display associated tags on post templates.\n"
+                                "  * Each tag should link to a page showing posts with that tag (e.g., /tags/<tag_name>/).\n"
+                                "  * Add URL patterns for tag-filtered views and search results (e.g., /search/).\n"
+                                "- Test tagging and search thoroughly, and document how to use them.\n"
+                            ),
+                            "order": 4,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks for integrating tagging functionality (Tag model or equivalent) with Post",
+                                "Checks for modifications to Post creation/update forms to include tags",
+                                "Checks for implementation of search functionality using title/content/tags",
+                                "Checks for URL configuration for viewing posts by tag and for search results",
+                            ],
+                        },
+                    ],
                 }, 
             ],
         },
@@ -1424,14 +1598,389 @@ CURRICULUM = {
                         },
                     ],
                 },
+
+                 {
+                    "title": "Building and deploying a Django API",
+                    "slug": "building-and-deploying-django-api",
+                    "description": (
+                        "Create a social media-style REST API with Django and Django REST Framework, including "
+                        "authentication, posts and comments, likes and notifications, and deployment to production."
+                    ),
+                    "order": 2,
+                    "objectives": [
+                        "Create a new Django project and app.",
+                        "Configure Django REST Framework and implement a robust user authentication system.",
+                        "Develop features that allow users to create, view, update, and delete posts and comments.",
+                        "Add features for users to follow other users and view a feed of posts from followed users.",
+                        "Enable users to like posts and receive notifications for various interactions within the platform.",
+                        "Prepare and deploy the Django REST API to a production environment, ensuring it is secure and scalable.",
+                    ],
+                    "tasks": [
+                        {
+                            "title": "0. Project Setup and User Authentication for a Social Media API",
+                            "instructions": (
+                                "Set up a new Django project and implement user authentication with Django REST Framework.\n\n"
+                                "Steps:\n"
+                                "- Install Django and DRF: pip install django djangorestframework.\n"
+                                "- Create project: django-admin startproject social_media_api.\n"
+                                "- cd into social_media_api and create app 'accounts': python manage.py startapp accounts.\n"
+                                "- Add 'rest_framework' and 'accounts' to INSTALLED_APPS in settings.py.\n"
+                                "- Create a custom user model extending AbstractUser with extra fields:\n"
+                                "  * bio (e.g. TextField)\n"
+                                "  * profile_picture (ImageField or URLField)\n"
+                                "  * followers (ManyToManyField to self, symmetrical=False)\n"
+                                "- Add 'rest_framework.authtoken' to INSTALLED_APPS and run migrations to create token tables.\n"
+                                "- Implement serializers and views in accounts app for:\n"
+                                "  * user registration\n"
+                                "  * login\n"
+                                "  * token retrieval\n"
+                                "- Configure accounts/urls.py with paths for /register, /login, and /profile.\n"
+                                "- Ensure registration/login endpoints return a token on success.\n"
+                                "- Run python manage.py runserver and test registration/login via Postman, checking tokens are returned.\n"
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks if 'accounts' is added in settings.py INSTALLED_APPS",
+                                "Checks for custom user model extending AbstractUser with bio, profile_picture, and followers (ManyToMany to self, symmetrical=False)",
+                                "Checks for implementation of views and serializers in accounts app for registration, login, and token retrieval",
+                                "Checks for URL patterns in accounts/urls.py for /register, /login, and /profile",
+                            ],
+                        },
+                        {
+                            "title": "1. Implementing Posts and Comments Functionality",
+                            "instructions": (
+                                "Create posts and comments functionality for the social_media_api project.\n\n"
+                                "Steps:\n"
+                                "- Create a new app 'posts': python manage.py startapp posts.\n"
+                                "- Add 'posts' to INSTALLED_APPS in settings.py.\n"
+                                "- In posts/models.py, define:\n"
+                                "  * Post model: author (FK to User), title, content, created_at, updated_at.\n"
+                                "  * Comment model: post (FK to Post), author (FK to User), content, created_at, updated_at.\n"
+                                "- Run: python manage.py makemigrations posts; python manage.py migrate.\n"
+                                "- In posts/serializers.py, create serializers for Post and Comment handling relationships correctly.\n"
+                                "- In posts/views.py, use DRF viewsets (ModelViewSet) to provide CRUD for Post and Comment.\n"
+                                "- Implement permissions so users can only edit/delete their own posts and comments.\n"
+                                "- In posts/urls.py, configure routers and URL patterns for Post and Comment viewsets.\n"
+                                "- Add pagination to list endpoints and implement filtering/search on Post (e.g. by title/content).\n"
+                                "- Test all endpoints (list, create, retrieve, update, delete) and permissions using Postman or tests.\n"
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks if new app 'posts' is created",
+                                "Checks if 'posts' app is added to INSTALLED_APPS",
+                                "Checks for implementation of Post and Comment models in posts/models.py",
+                                "Checks for addition of posts URLs and router configuration",
+                                "Checks that viewsets in posts/views.py provide CRUD and enforce 'only owner can edit/delete'",
+                            ],
+                        },
+                        {
+                            "title": "2. Implementing Notifications and Likes Functionality",
+                            "instructions": (
+                                "Add likes and notifications to make the social_media_api interactive.\n\n"
+                                "Steps:\n"
+                                "- In posts/models.py, create a Like model with ForeignKey to Post and ForeignKey to User.\n"
+                                "- Create a new app 'notifications': python manage.py startapp notifications; add it to INSTALLED_APPS.\n"
+                                "- In notifications/models.py, create a Notification model with fields:\n"
+                                "  * recipient (FK to User)\n"
+                                "  * actor (FK to User)\n"
+                                "  * verb (Text or CharField, e.g. 'liked your post')\n"
+                                "  * target (GenericForeignKey to related object)\n"
+                                "  * timestamp (DateTimeField)\n"
+                                "- Implement views in posts/views.py (or separate modules) to handle liking and unliking posts:\n"
+                                "  * /posts/<int:pk>/like/\n"
+                                "  * /posts/<int:pk>/unlike/\n"
+                                "  * Ensure authenticated users can like/unlike and cannot like a post multiple times.\n"
+                                "  * Update the Like model accordingly and create Notification entries when appropriate.\n"
+                                "- In notifications/views.py, implement an endpoint to fetch notifications for the authenticated user (e.g. /notifications/).\n"
+                                "- Configure URL patterns:\n"
+                                "  * In posts/urls.py: routes for like/unlike endpoints.\n"
+                                "  * In notifications/urls.py: route for listing notifications.\n"
+                                "- Test: liking/unliking posts, receiving and listing notifications.\n"
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that new 'notifications' app is created",
+                                "Checks for Like model in posts app with FK to Post and FK to User",
+                                "Checks for Notification model in notifications app with recipient, actor, verb, target, timestamp",
+                                "Checks for views to handle liking and unliking posts and generating notifications",
+                                "Checks that posts/urls.py defines like/unlike URL patterns, e.g. /posts/<int:pk>/like/ and /posts/<int:pk>/unlike/",
+                            ],
+                        },
+                        {
+                            "title": "3. Deploying the Django REST API to Production",
+                            "instructions": (
+                                "Prepare and deploy the social_media_api project to a production environment.\n\n"
+                                "Steps:\n"
+                                "- Update settings.py for production:\n"
+                                "  * DEBUG = False\n"
+                                "  * Configure ALLOWED_HOSTS for your domain/host.\n"
+                                "  * Configure production DATABASES settings.\n"
+                                "  * Configure security settings, e.g. SECURE_BROWSER_XSS_FILTER, X_FRAME_OPTIONS, "
+                                "SECURE_CONTENT_TYPE_NOSNIFF, SECURE_SSL_REDIRECT.\n"
+                                "- Ensure database credentials and other secrets use environment variables.\n"
+                                "- Configure static and media handling for production:\n"
+                                "  * Use collectstatic.\n"
+                                "  * Optionally configure cloud storage (e.g. AWS S3) for static/media files.\n"
+                                "- Choose a hosting service (Heroku, AWS, DigitalOcean, etc.), set up the environment and WSGI server "
+                                "(Gunicorn/uWSGI), and configure reverse proxy (e.g. Nginx) and HTTPS.\n"
+                                "- Deploy your code (via Git or the host's deployment method), configure environment variables, and run migrations.\n"
+                                "- Set up logging/monitoring and perform final tests on the live URL.\n"
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": [
+                                "Checks that settings.py is adjusted for production (DEBUG=False, ALLOWED_HOSTS, production DATABASES)",
+                                "Checks that security settings like SECURE_BROWSER_XSS_FILTER, X_FRAME_OPTIONS, SECURE_CONTENT_TYPE_NOSNIFF, and SECURE_SSL_REDIRECT are configured",
+                                "Checks that database credentials are set up correctly via environment or secure config",
+                                "Checks that static/media handling for production (collectstatic, external storage) is configured",
+                            ],
+                        },
+                    ],
+                },
             ],
         },
 
-        
-
-
- 
-
- 
+          {
+            "name": "Capstone Projects",
+            "slug": "capstone-projects",
+            "description": "Standalone backend capstone projects that combine all topics.",
+            "order": 5,
+            "topics": [
+                {
+                    "title": "BE Capstone Project Ideas",
+                    "slug": "be-capstone-project-ideas",
+                    "description": (
+                        "A collection of backend API capstone ideas plus design and review guidelines. "
+                        "You are expected to design and implement ALL of these projects over time."
+                    ),
+                    "order": 1,
+                    "objectives": [],
+                    "tasks": [
+                        {
+                            "title": "0. Capstone Overview & Review Criteria",
+                            "instructions": (
+                                "This task describes how your final project(s) will be reviewed.\n\n"
+                                "Review criteria include:\n"
+                                "1) Originality:\n"
+                                "- Did you come up with your own idea instead of directly using provided examples?\n"
+                                "- This encourages creativity and helps you build something you’ll be proud of.\n\n"
+                                "2) Commit History:\n"
+                                "- Are commits descriptive and meaningful (e.g., 'feat: add user authentication' instead of "
+                                "'update file')?\n"
+                                "- Is there clear commit history showing progress over time?\n"
+                                "- Why do you only have a few commits for a project you worked on for weeks?\n\n"
+                                "3) Features & API Functionality:\n"
+                                "- Are your endpoints well-structured and following RESTful conventions?\n"
+                                "- Are all CRUD operations implemented where needed?\n"
+                                "- Are there proper status codes for different responses (200, 201, 400, 401, 403, 500, etc.)?\n\n"
+                                "4) API Documentation:\n"
+                                "- Is there clear API documentation?\n"
+                                "- Does it list endpoints (GET, POST, PUT, DELETE) and expected request/response structures?\n\n"
+                                "5) Code Quality & Best Practices:\n"
+                                "- Is the code clean, modular, and well-structured?\n\n"
+                                "6) Git Usage & Version Control:\n"
+                                "- Are commits incremental and meaningful, not one huge commit?\n\n"
+                                "7) Database Design & Performance:\n"
+                                "- Is the database well-structured with proper relationships?\n"
+                                "- Are ForeignKey, OneToOneField, ManyToManyField used appropriately?\n\n"
+                                "8) Error Handling & Logging:\n"
+                                "- Are custom error responses implemented (e.g., 400 Bad Request, 403 Forbidden, 404 Not Found)?\n"
+                                "- Does the API handle common DRF/Django exceptions (ValidationError, PermissionDenied, "
+                                "ObjectDoesNotExist)?\n"
+                                "- Is there a logging system for tracking errors?\n\n"
+                                "Use this task as a checklist when building each capstone API."
+                            ),
+                            "order": 0,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "1. Design Phase: ERD and API Endpoints",
+                            "instructions": (
+                                "In this phase, you design your backend before coding. Do this once, then reuse/refine it "
+                                "as you build each capstone.\n\n"
+                                "1) Design Your Database Schema (ERD):\n"
+                                "- Identify main entities (e.g., Users, Tasks, Orders, Products, Posts, Comments).\n"
+                                "- Define relationships (One-to-Many, Many-to-Many, One-to-One).\n"
+                                "- Choose appropriate data types and constraints (primary keys, foreign keys, indexes).\n\n"
+                                "Deliverable:\n"
+                                "- Use a tool like Miro, draw.io, dbdiagram.io to create your ERD.\n"
+                                "- Add a screenshot of the ERD to a Google Document.\n\n"
+                                "2) List Your API Endpoints:\n"
+                                "- Define core API routes.\n"
+                                "- For each route, specify the HTTP methods (GET, POST, PUT, DELETE).\n"
+                                "- Describe what each endpoint does and what data it handles.\n"
+                                "- Consider authentication and authorization where necessary.\n\n"
+                                "Deliverable:\n"
+                                "- In the same Google Document, list all planned API endpoints.\n\n"
+                                "Final Deliverable for this phase:\n"
+                                "- A Google Document containing:\n"
+                                "  * A screenshot of your ERD.\n"
+                                "  * A list of API endpoints you plan to implement.\n"
+                                "- Upload the Google Doc link (publicly accessible) for review.\n"
+                                "These will serve as your blueprint for the implementation phase."
+                            ),
+                            "order": 1,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "2. Library Management System API",
+                            "instructions": (
+                                "Description: Create an API to manage a library system where users can check out and return "
+                                "books, and view available books.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for books and users.\n"
+                                "- Endpoint for checking out and returning books.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 2,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "3. Task Management API",
+                            "instructions": (
+                                "Description: Build an API to manage tasks where users can create, update, and delete tasks, "
+                                "and mark tasks as complete or incomplete.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for tasks and users.\n"
+                                "- Endpoint for marking tasks as complete or incomplete.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 3,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "4. E-commerce Product API",
+                            "instructions": (
+                                "Description: Develop an API for managing an e-commerce platform’s products, where users can "
+                                "add, update, and delete products, and view product details.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for products and users.\n"
+                                "- Endpoint for searching products by name or category.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 4,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "5. Movie Review API",
+                            "instructions": (
+                                "Description: Create an API to manage movie reviews where users can add, update, and delete "
+                                "reviews, and view reviews for a specific movie.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for reviews and users.\n"
+                                "- Endpoint for viewing reviews by movie.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 5,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "6. Event Management API",
+                            "instructions": (
+                                "Description: Build an API to manage events where users can create, update, and delete events, "
+                                "and view upcoming events.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for events and users.\n"
+                                "- Endpoint for viewing upcoming events.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 6,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "7. Blogging Platform API",
+                            "instructions": (
+                                "Description: Develop an API for a blogging platform where users can create, update, and "
+                                "delete blog posts, and view posts by category or author.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for blog posts and users.\n"
+                                "- Endpoint for viewing posts by category or author.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 7,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "8. Fitness Tracker API",
+                            "instructions": (
+                                "Description: Create an API to manage fitness activities where users can log, update, and "
+                                "delete activities, and view activity history.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for activities and users.\n"
+                                "- Endpoint for viewing activity history.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 8,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "9. Recipe Management API",
+                            "instructions": (
+                                "Description: Build an API to manage recipes where users can add, update, and delete recipes, "
+                                "and view recipes by category or ingredient.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for recipes and users.\n"
+                                "- Endpoint for viewing recipes by category or ingredient.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 9,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "10. Inventory Management API",
+                            "instructions": (
+                                "Description: Develop an API to manage inventory for a store where users can add, update, and "
+                                "delete inventory items, and view inventory levels.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for inventory items and users.\n"
+                                "- Endpoint for viewing inventory levels.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 10,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                        {
+                            "title": "11. Social Media API",
+                            "instructions": (
+                                "Description: Create an API for a social media platform where users can create, update, and "
+                                "delete posts, follow other users, and view a feed of posts.\n\n"
+                                "Requirements:\n"
+                                "- CRUD operations for posts and users.\n"
+                                "- Endpoint for following users and viewing a feed of posts.\n"
+                                "- Use Django ORM for database interactions.\n"
+                                "- Deploy the API on Heroku or PythonAnywhere."
+                            ),
+                            "order": 11,
+                            "is_mandatory": True,
+                            "checkers": []
+                        },
+                    ],
+                },
+            ],
+        },
     ]
+
 }
