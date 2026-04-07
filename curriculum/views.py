@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Category
 
-# Create your views here.
+
 def home(request):
-    return HttpResponse("dev_wizard curriculum home: URL wiring ok")
+    categories = Category.objects.all().order_by("order", "name")
+    context = {
+        "categories": categories,
+    }
+    return render(request, "curriculum/category_list.html", context)
