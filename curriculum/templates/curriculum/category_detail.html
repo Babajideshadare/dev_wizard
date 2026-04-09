@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.name }} - dev_wizard</title>
+</head>
+<body>
+    <h1>{{ category.name }}</h1>
+
+    {% if category.description %}
+        <p>{{ category.description }}</p>
+    {% endif %}
+
+    <h2>Topics in this category</h2>
+
+    {% if topics %}
+        <ul>
+            {% for topic in topics %}
+                <li>
+                    {{ topic.title }}
+                    {% if topic.description %}
+                        - {{ topic.description }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No topics found for this category.</p>
+    {% endif %}
+
+    <p><a href="{% url 'curriculum:home' %}">Back to all categories</a></p>
+</body>
+</html>

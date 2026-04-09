@@ -9,15 +9,17 @@
     <p>Select a category to explore its topics.</p>
 
     {% if categories %}
-        <ul>
-            {% for category in categories %}
-                <li>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'curriculum:category-detail' slug=category.slug %}">
                     {{ category.name }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No categories found.</p>
-    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No categories found.</p>
+{% endif %}
 </body>
 </html>
