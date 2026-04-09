@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ topic.title }} - dev_wizard</title>
+</head>
+<body>
+    <h1>{{ topic.title }}</h1>
+    <p>
+        Category:
+        {{ topic.category.name }}
+        |
+        <a href="{% url 'curriculum:category-detail' slug=topic.category.slug %}">Back to {{ topic.category.name }}</a>
+    </p>
+
+    {% if topic.description %}
+        <p><strong>Description:</strong> {{ topic.description }}</p>
+    {% endif %}
+
+    <h2>Objectives</h2>
+    {% if objectives %}
+        <ul>
+            {% for objective in objectives %}
+                <li>{{ objective.description }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No objectives defined for this topic.</p>
+    {% endif %}
+
+    <h2>Tasks</h2>
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <h3>{{ task.title }}</h3>
+                    {% if task.instructions %}
+                        <p>{{ task.instructions|linebreaks }}</p>
+                    {% endif %}
+
+                    {% with checkers=task.checkers.all %}
+                        {% if checkers %}
+                            <h4>Checkers</h4>
+                            <ul>
+                                {% for checker in checkers %}
+                                    <li>{{ checker.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endwith %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tasks defined for this topic.</p>
+    {% endif %}
+
+    <p><a href="{% url 'curriculum:home' %}">Back to all categories</a></p>
+</body>
+</html>

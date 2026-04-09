@@ -6,4 +6,5 @@ app_name = "curriculum"
 urlpatterns = [
     path("", views.home, name="home"),
     path("category/<slug:slug>/", views.category_detail, name="category-detail"),
+    path("topic/<slug:slug>/", views.topic_detail, name="topic-detail"),
 ]

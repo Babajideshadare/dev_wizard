@@ -14,19 +14,21 @@
     <h2>Topics in this category</h2>
 
     {% if topics %}
-        <ul>
-            {% for topic in topics %}
-                <li>
+    <ul>
+        {% for topic in topics %}
+            <li>
+                <a href="{% url 'curriculum:topic-detail' slug=topic.slug %}">
                     {{ topic.title }}
-                    {% if topic.description %}
-                        - {{ topic.description }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No topics found for this category.</p>
-    {% endif %}
+                </a>
+                {% if topic.description %}
+                    - {{ topic.description }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No topics found for this category.</p>
+{% endif %}
 
     <p><a href="{% url 'curriculum:home' %}">Back to all categories</a></p>
 </body>
