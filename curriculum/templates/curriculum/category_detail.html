@@ -6,24 +6,27 @@
     <h1>{{ category.name }}</h1>
 
     {% if category.description %}
-        <p>{{ category.description }}</p>
+        <p class="page-intro">{{ category.description }}</p>
     {% endif %}
 
     <h2>Topics in this category</h2>
 
     {% if topics %}
-        <ul>
+        <div class="card-grid">
             {% for topic in topics %}
-                <li>
-                    <a href="{% url 'curriculum:topic-detail' slug=topic.slug %}">
-                        {{ topic.title }}
-                    </a>
-                    {% if topic.description %}
-                        - {{ topic.description }}
-                    {% endif %}
-                </li>
+                <a href="{% url 'curriculum:topic-detail' slug=topic.slug %}" class="card">
+                    <div>
+                        <div class="card-title">{{ topic.title }}</div>
+                        {% if topic.description %}
+                            <p class="card-description">{{ topic.description }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-meta">
+                        <span class="progress-pill">Progress: coming soon</span>
+                    </div>
+                </a>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>No topics found for this category.</p>
     {% endif %}

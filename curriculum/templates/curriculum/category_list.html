@@ -4,18 +4,21 @@
 
 {% block content %}
     <h1>Curriculum Categories</h1>
-    <p>Select a category to explore its topics.</p>
+    <p class="page-intro">Select a category to explore its topics.</p>
 
     {% if categories %}
-        <ul>
+        <div class="card-grid">
             {% for category in categories %}
-                <li>
-                    <a href="{% url 'curriculum:category-detail' slug=category.slug %}">
-                        {{ category.name }}
-                    </a>
-                </li>
+                <a href="{% url 'curriculum:category-detail' slug=category.slug %}" class="card">
+                    <div>
+                        <div class="card-title">{{ category.name }}</div>
+                        {% if category.description %}
+                            <p class="card-description">{{ category.description }}</p>
+                        {% endif %}
+                    </div>
+                </a>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>No categories found.</p>
     {% endif %}

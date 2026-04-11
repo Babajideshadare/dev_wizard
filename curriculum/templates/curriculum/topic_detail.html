@@ -12,43 +12,57 @@
     </p>
 
     {% if topic.description %}
-        <p><strong>Description:</strong> {{ topic.description }}</p>
+        <p class="page-intro"><strong>Description:</strong> {{ topic.description }}</p>
     {% endif %}
 
-    <h2>Objectives</h2>
-    {% if objectives %}
-        <ul>
-            {% for objective in objectives %}
-                <li>{{ objective.description }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No objectives defined for this topic.</p>
-    {% endif %}
+    <div class="objectives-card">
+        <h2>Objectives</h2>
+        {% if objectives %}
+            <ul>
+                {% for objective in objectives %}
+                    <li>{{ objective.description }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No objectives defined for this topic.</p>
+        {% endif %}
+    </div>
 
     <h2>Tasks</h2>
     {% if tasks %}
-        <ul>
+        <div class="task-list">
             {% for task in tasks %}
-                <li>
-                    <h3>{{ task.title }}</h3>
-                    {% if task.instructions %}
-                        <p>{{ task.instructions|linebreaks }}</p>
-                    {% endif %}
-
-                    {% with checkers=task.checkers.all %}
-                        {% if checkers %}
-                            <h4>Checkers</h4>
-                            <ul>
-                                {% for checker in checkers %}
-                                    <li>{{ checker.description }}</li>
-                                {% endfor %}
-                            </ul>
+                <details class="task-card">
+                    <summary>
+                        <span class="task-header-title">{{ task.title }}</span>
+                        <span class="task-header-indicator">▼</span>
+                    </summary>
+                    <div class="task-body">
+                        {% if task.instructions %}
+                            <p>{{ task.instructions|linebreaks }}</p>
                         {% endif %}
-                    {% endwith %}
-                </li>
+
+                        {% with checkers=task.checkers.all %}
+                        {% if checkers %}
+        <details class="checker-card">
+            <summary>
+                <span class="checker-header-title">
+                    Checkers ({{ checkers|length }})
+                </span>
+                <span class="task-header-indicator">▼</span>
+            </summary>
+            <ul class="checker-list">
+                {% for checker in checkers %}
+                    <li>{{ checker.description }}</li>
+                {% endfor %}
+            </ul>
+        </details>
+    {% endif %}
+{% endwith %}
+                    </div>
+                </details>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>No tasks defined for this topic.</p>
     {% endif %}
