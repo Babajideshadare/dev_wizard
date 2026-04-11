@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}dev_wizard{% endblock %}</title>
+    <title>{% block title %}Dev Wizard{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'curriculum/css/style.css' %}">
 </head>
 <body>
     <header class="top-nav">
-        <div class="nav-inner container">
+        <div class="nav-inner">
             <div class="nav-left">
-                <a href="{% url 'curriculum:home' %}" class="logo">dev_wizard</a>
+                <a href="{% url 'curriculum:home' %}" class="logo">Dev Wizard</a>
             </div>
             <nav class="nav-links">
                 <a href="{% url 'curriculum:home' %}">Curriculum</a>
@@ -36,7 +36,7 @@
 
     <footer class="page-footer">
         <div class="container">
-            <p>dev_wizard &copy; {{ now|default:'' }}</p>
+            <p>Dev Wizard &copy; {{ now|default:'' }}</p>
         </div>
     </footer>
 </body>

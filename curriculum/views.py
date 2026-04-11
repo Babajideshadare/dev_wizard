@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
+from accounts.models import DeveloperProfile
 from .models import Category, Topic
 
 
@@ -8,11 +9,15 @@ from .models import Category, Topic
 def home(request):
     """
     Home page: list all Categories (Python, Django, API, Capstone, etc.).
-    User must be logged in to access this page.
+    Also shows a sidebar profile summary card for the logged-in user.
     """
     categories = Category.objects.all().order_by("order", "name")
+    profile, _ = DeveloperProfile.objects.get_or_create(user=request.user)
+
     context = {
         "categories": categories,
+        "profile": profile,
+        "user_email": request.user.email,
     }
     return render(request, "curriculum/category_list.html", context)
 

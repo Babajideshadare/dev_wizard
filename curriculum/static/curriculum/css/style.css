@@ -39,9 +39,9 @@ a:hover {
 /* ---------- Layout ---------- */
 
 .container {
-    max-width: 1040px;
+    max-width: 1200px;           /* wider, more professional layout */
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 24px;             /* a bit more horizontal padding */
 }
 
 .page-main {
@@ -63,20 +63,23 @@ a:hover {
 }
 
 .nav-inner {
+    max-width: 1200px;           /* match main content width */
+    margin: 0 auto;
+    padding: 12px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
 }
 
 .logo {
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
 }
 
 .nav-links {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     font-size: 0.95rem;
 }
 
@@ -99,6 +102,24 @@ p {
 .page-intro {
     color: var(--text-muted);
     font-size: 0.95rem;
+}
+
+/* ---------- Home layout with sidebar ---------- */
+
+.home-layout {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);   /* wider sidebar, more defined columns */
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+
+.home-sidebar {
+    /* Sidebar sits flush with container's left edge */
+}
+
+.home-main {
+    /* main curriculum content uses the remaining space */
 }
 
 /* ---------- Cards & grids ---------- */
@@ -165,8 +186,8 @@ p {
 .task-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;            /* more space between task cards */
-    margin: 16px 0 24px;  /* space around the task list */
+    gap: 16px;
+    margin: 16px 0 24px;
 }
 
 .task-card {
@@ -395,7 +416,8 @@ button[type="submit"]:hover {
     color: var(--accent);
 }
 
-.profile-summary-main h1 {
+.profile-summary-main h1,
+.home-profile-name {
     margin-top: 0;
     margin-bottom: 0.3rem;
 }
@@ -446,7 +468,28 @@ button[type="submit"]:hover {
     text-decoration: underline;
 }
 
-/* Profile sections */
+/* Sidebar profile card tweaks on home */
+
+.home-profile-card {
+    margin-top: 16px;
+}
+
+.home-profile-section {
+    margin-top: 12px;
+}
+
+.home-profile-section h3 {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.home-profile-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Profile sections in full profile page */
 
 .profile-sections {
     display: grid;
@@ -505,6 +548,10 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 768px) {
+    .home-layout {
+        grid-template-columns: 1fr;
+    }
+
     .profile-summary-header {
         flex-direction: column;
         align-items: flex-start;

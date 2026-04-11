@@ -3,23 +3,87 @@
 {% block title %}Categories - dev_wizard{% endblock %}
 
 {% block content %}
-    <h1>Curriculum Categories</h1>
-    <p class="page-intro">Select a category to explore its topics.</p>
+    <div class="home-layout">
+        <aside class="home-sidebar">
+            <div class="profile-card home-profile-card">
+                <div class="profile-summary-header">
+                    <div class="profile-avatar-block">
+                        <div class="profile-avatar">
+                            {% if profile.profile_picture %}
+                                <img src="{{ profile.profile_picture.url }}" alt="{{ profile.full_name|default:'Your profile picture' }}">
+                            {% else %}
+                                <div class="avatar-placeholder">
+                                    {% if profile.full_name %}
+                                        {{ profile.full_name|first|upper }}
+                                    {% else %}
+                                        {{ request.user.username|first|upper }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
 
-    {% if categories %}
-        <div class="card-grid">
-            {% for category in categories %}
-                <a href="{% url 'curriculum:category-detail' slug=category.slug %}" class="card">
-                    <div>
-                        <div class="card-title">{{ category.name }}</div>
-                        {% if category.description %}
-                            <p class="card-description">{{ category.description }}</p>
+                    <div class="profile-summary-main">
+                        <h2 class="home-profile-name">{{ profile.full_name|default:"Your Name" }}</h2>
+
+                        {% if profile.headline %}
+                            <p class="profile-headline">{{ profile.headline }}</p>
+                        {% endif %}
+
+                        {% if profile.location %}
+                            <p class="profile-location">{{ profile.location }}</p>
                         {% endif %}
                     </div>
-                </a>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>No categories found.</p>
-    {% endif %}
+                </div>
+
+                <div class="home-profile-section">
+                    <h3>About</h3>
+                    <p class="home-profile-text">
+                        {% if profile.bio %}
+                            {{ profile.bio }}
+                        {% else %}
+                            Add a short bio about yourself.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="home-profile-section">
+                    <h3>Education</h3>
+                    <p class="home-profile-text">
+                        {% if profile.education_summary %}
+                            {{ profile.education_summary }}
+                        {% else %}
+                            Add a brief summary of your education.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="home-profile-section">
+                    <a href="{% url 'accounts:profile' %}" class="btn-secondary">View full profile</a>
+                </div>
+            </div>
+        </aside>
+
+        <section class="home-main">
+            <h1>Curriculum Categories</h1>
+            <p class="page-intro">Select a category to explore its topics.</p>
+
+            {% if categories %}
+                <div class="card-grid">
+                    {% for category in categories %}
+                        <a href="{% url 'curriculum:category-detail' slug=category.slug %}" class="card">
+                            <div>
+                                <div class="card-title">{{ category.name }}</div>
+                                {% if category.description %}
+                                    <p class="card-description">{{ category.description }}</p>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No categories found.</p>
+            {% endif %}
+        </section>
+    </div>
 {% endblock %}
