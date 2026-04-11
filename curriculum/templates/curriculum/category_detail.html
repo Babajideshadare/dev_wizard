@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ category.name }} - dev_wizard</title>
-</head>
-<body>
+{% extends "curriculum/base.html" %}
+
+{% block title %}{{ category.name }} - dev_wizard{% endblock %}
+
+{% block content %}
     <h1>{{ category.name }}</h1>
 
     {% if category.description %}
@@ -14,22 +12,21 @@
     <h2>Topics in this category</h2>
 
     {% if topics %}
-    <ul>
-        {% for topic in topics %}
-            <li>
-                <a href="{% url 'curriculum:topic-detail' slug=topic.slug %}">
-                    {{ topic.title }}
-                </a>
-                {% if topic.description %}
-                    - {{ topic.description }}
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No topics found for this category.</p>
-{% endif %}
+        <ul>
+            {% for topic in topics %}
+                <li>
+                    <a href="{% url 'curriculum:topic-detail' slug=topic.slug %}">
+                        {{ topic.title }}
+                    </a>
+                    {% if topic.description %}
+                        - {{ topic.description }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No topics found for this category.</p>
+    {% endif %}
 
     <p><a href="{% url 'curriculum:home' %}">Back to all categories</a></p>
-</body>
-</html>
+{% endblock %}

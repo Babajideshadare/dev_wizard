@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ topic.title }} - dev_wizard</title>
-</head>
-<body>
+{% extends "curriculum/base.html" %}
+
+{% block title %}{{ topic.title }} - dev_wizard{% endblock %}
+
+{% block content %}
     <h1>{{ topic.title }}</h1>
     <p>
         Category:
@@ -56,5 +54,4 @@
     {% endif %}
 
     <p><a href="{% url 'curriculum:home' %}">Back to all categories</a></p>
-</body>
-</html>
+{% endblock %}

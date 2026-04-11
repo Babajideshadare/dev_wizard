@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}dev_wizard{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'curriculum/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'curriculum:home' %}">dev_wizard</a></h1>
+        <nav>
+            <!-- Later we can add navigation links here -->
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Child templates will put their page-specific HTML here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>dev_wizard &copy; {{ now|default:'' }}</p>
+    </footer>
+</body>
+</html>
