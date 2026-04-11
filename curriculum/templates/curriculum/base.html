@@ -12,13 +12,17 @@
             <div class="nav-left">
                 <a href="{% url 'curriculum:home' %}" class="logo">dev_wizard</a>
             </div>
-            <nav class="nav-links">
-                <a href="{% url 'curriculum:home' %}">Curriculum</a>
-                <!-- Capstones category slug is known: 'capstone-projects' -->
-                <a href="/category/capstone-projects/">Capstones</a>
-                <!-- Placeholder for Step 6 (auth) -->
-                <a href="#">Login / Profile</a>
-            </nav>
+           <nav class="nav-links">
+    <a href="{% url 'curriculum:home' %}">Curriculum</a>
+    <a href="/category/capstone-projects/">Capstones</a>
+
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'accounts:profile' %}">Profile ({{ request.user.username }})</a>
+        <a href="{% url 'accounts:logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'accounts:login' %}">Login</a>
+    {% endif %}
+</nav>
         </div>
     </header>
 
