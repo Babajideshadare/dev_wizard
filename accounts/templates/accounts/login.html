@@ -3,24 +3,33 @@
 {% block title %}Login - dev_wizard{% endblock %}
 
 {% block content %}
-    <h1>Login</h1>
+    <div class="auth-card">
+        <h1>Login</h1>
+        <p class="page-intro">Sign in to track your learning progress.</p>
 
-    <form method="post" class="auth-form">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
 
-        <div class="form-field">
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            {{ form.username.errors }}
+            <div class="form-field">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+
+            <div class="form-field">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="auth-extra-links">
+            <a href="#">Forgot your login details?</a>
+            <span>·</span>
+            <a href="{% url 'accounts:register' %}">Create an account</a>
         </div>
-
-        <div class="form-field">
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            {{ form.password.errors }}
-        </div>
-
-        <button type="submit">Login</button>
-    </form>
+    </div>
 {% endblock %}

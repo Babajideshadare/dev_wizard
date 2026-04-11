@@ -1,0 +1,151 @@
+{% extends "curriculum/base.html" %}
+
+{% block title %}Your Profile - dev_wizard{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <div class="profile-summary-header">
+            <div class="profile-avatar-block">
+                <div class="profile-avatar">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="{{ profile.full_name|default:'Your profile picture' }}">
+                    {% else %}
+                        <div class="avatar-placeholder">
+                            {% if profile.full_name %}
+                                {{ profile.full_name|first|upper }}
+                            {% else %}
+                                {{ request.user.username|first|upper }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                <a href="{% url 'accounts:profile-edit' %}#profile-picture-field" class="btn-link-small">
+                    Change picture
+                </a>
+            </div>
+
+            <div class="profile-summary-main">
+                <h1>{{ profile.full_name|default:"Your Name" }}</h1>
+
+                {% if profile.headline %}
+                    <p class="profile-headline">{{ profile.headline }}</p>
+                {% endif %}
+
+                {% if profile.location %}
+                    <p class="profile-location">{{ profile.location }}</p>
+                {% endif %}
+            </div>
+
+            <div class="profile-summary-actions">
+                <a href="{% url 'accounts:profile-edit' %}" class="btn-secondary">Edit profile</a>
+                <a href="{% url 'accounts:password-change' %}" class="btn-link">Change password</a>
+            </div>
+        </div>
+
+        <div class="profile-sections">
+            <section class="profile-section">
+                <h2>Experience & Skills</h2>
+                <dl class="profile-meta">
+                    <div>
+                        <dt>Years of experience</dt>
+                        <dd>
+                            {% if profile.years_of_experience %}
+                                {{ profile.years_of_experience }} years
+                            {% else %}
+                                Not set yet
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Current role</dt>
+                        <dd>{{ profile.current_role|default:"Not set yet" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Primary tech stack</dt>
+                        <dd>{{ profile.primary_tech_stack|default:"Not set yet" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Spoken languages</dt>
+                        <dd>{{ profile.spoken_languages|default:"Not set yet" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Availability</dt>
+                        <dd>{{ profile.availability|default:"Not set yet" }}</dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="profile-section">
+                <h2>About & Education</h2>
+                <dl class="profile-meta">
+                    <div>
+                        <dt>About me</dt>
+                        <dd>
+                            {% if profile.bio %}
+                                {{ profile.bio }}
+                            {% else %}
+                                Not set yet
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Education summary</dt>
+                        <dd>
+                            {% if profile.education_summary %}
+                                {{ profile.education_summary }}
+                            {% else %}
+                                Not set yet
+                            {% endif %}
+                        </dd>
+                    </div>
+                </dl>
+            </section>
+
+            <section class="profile-section">
+                <h2>Contact & Links</h2>
+                <dl class="profile-meta">
+                    <div>
+                        <dt>Email</dt>
+                        <dd>{{ user_email|default:"Not set yet" }}</dd>
+                    </div>
+                    <div>
+                        <dt>Website</dt>
+                        <dd>
+                            {% if profile.website_url %}
+                                <a href="{{ profile.website_url }}" target="_blank" rel="noopener">
+                                    {{ profile.website_url }}
+                                </a>
+                            {% else %}
+                                Not set yet
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>GitHub</dt>
+                        <dd>
+                            {% if profile.github_url %}
+                                <a href="{{ profile.github_url }}" target="_blank" rel="noopener">
+                                    {{ profile.github_url }}
+                                </a>
+                            {% else %}
+                                Not set yet
+                            {% endif %}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>LinkedIn</dt>
+                        <dd>
+                            {% if profile.linkedin_url %}
+                                <a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener">
+                                    {{ profile.linkedin_url }}
+                                </a>
+                            {% else %}
+                                Not set yet
+                            {% endif %}
+                        </dd>
+                    </div>
+                </dl>
+            </section>
+        </div>
+    </div>
+{% endblock %}
