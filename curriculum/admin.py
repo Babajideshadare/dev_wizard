@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Topic, Objective, Task, Checker
+from .models import Category, Topic, Objective, Task, Checker, UserCheckerProgress
 
 # Register your models here.
 
@@ -65,3 +65,11 @@ class CheckerAdmin(admin.ModelAdmin):
     def short_description(self, obj):
         return (obj.description[:60] + "...") if len(obj.description) > 60 else obj.description
     short_description.short_description = "Checker"
+
+@admin.register(UserCheckerProgress)
+class UserCheckerProgressAdmin(admin.ModelAdmin):
+    list_display = ("user", "checker", "is_completed", "completed_at", "created_at")
+    list_filter = ("is_completed", "checker__task__topic__category", "checker__task__topic")
+    search_fields = ("user__username", "checker__description", "checker__task__title")
+    autocomplete_fields = ("user", "checker")
+    ordering = ("-updated_at",)
