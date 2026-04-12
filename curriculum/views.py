@@ -118,3 +118,67 @@ def toggle_checker_completion(request, checker_id):
     base_url = reverse("curriculum:topic-detail", kwargs={"slug": topic_slug})
     redirect_url = f"{base_url}?open_task={checker.task_id}#checker-{checker.id}"
     return redirect(redirect_url)
+
+
+@login_required
+def progress_dashboard(request):
+    """
+    Dashboard page showing overall and per-topic progress for the logged-in user.
+    """
+    # Overall progress (all checkers in the system)
+    total_checkers = Checker.objects.count()
+    completed_overall = UserCheckerProgress.objects.filter(
+        user=request.user,
+        is_completed=True,
+    ).count()
+
+    if total_checkers > 0:
+        overall_percent = int((completed_overall / total_checkers) * 100)
+    else:
+        overall_percent = 0
+
+    # Per-topic progress grouped by Category
+    topics = Topic.objects.select_related("category").order_by(
+        "category__order",
+        "order",
+        "title",
+    )
+
+    from collections import OrderedDict
+    categories_progress = OrderedDict()  # preserve order
+
+    for topic in topics:
+        topic_total = Checker.objects.filter(task__topic=topic).count()
+        topic_completed = UserCheckerProgress.objects.filter(
+            user=request.user,
+            checker__task__topic=topic,
+            is_completed=True,
+        ).count()
+
+        if topic_total > 0:
+            topic_percent = int((topic_completed / topic_total) * 100)
+        else:
+            topic_percent = 0
+
+        cat = topic.category
+        if cat.id not in categories_progress:
+            categories_progress[cat.id] = {
+                "category": cat,
+                "topics": [],
+            }
+        categories_progress[cat.id]["topics"].append(
+            {
+                "topic": topic,
+                "total": topic_total,
+                "completed": topic_completed,
+                "percent": topic_percent,
+            }
+        )
+
+    context = {
+        "overall_total": total_checkers,
+        "overall_completed": completed_overall,
+        "overall_percent": overall_percent,
+        "categories_progress": list(categories_progress.values()),
+    }
+    return render(request, "curriculum/progress_dashboard.html", context)

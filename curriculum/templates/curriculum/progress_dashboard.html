@@ -1,0 +1,74 @@
+{% extends "curriculum/base.html" %}
+
+{% block title %}My Progress - dev_wizard{% endblock %}
+
+{% block content %}
+    <h1>My Progress</h1>
+
+    {% if overall_total > 0 %}
+        <div class="topic-progress">
+            <div class="topic-progress-top">
+                <span class="topic-progress-label">Overall progress</span>
+                <span class="topic-progress-summary">
+                    {{ overall_completed }} / {{ overall_total }} checkers completed
+                    ({{ overall_percent }}%)
+                </span>
+            </div>
+            <div class="topic-progress-bar">
+                <div class="topic-progress-bar-fill" style="width: {{ overall_percent }}%;"></div>
+            </div>
+        </div>
+    {% else %}
+        <p>No checkers defined yet in the curriculum.</p>
+    {% endif %}
+
+    {% for block in categories_progress %}
+        <section class="progress-category-section">
+            <h2>{{ block.category.name }}</h2>
+            {% if block.category.description %}
+                <p class="page-intro">{{ block.category.description }}</p>
+            {% endif %}
+
+            {% if block.topics %}
+                <div class="card-grid">
+                    {% for tp in block.topics %}
+                        <div class="card">
+                            <div>
+                                <div class="card-title">{{ tp.topic.title }}</div>
+                                {% if tp.topic.description %}
+                                    <p class="card-description">{{ tp.topic.description }}</p>
+                                {% endif %}
+                            </div>
+
+                            {% if tp.total > 0 %}
+                                <div class="topic-progress topic-progress-compact">
+                                    <div class="topic-progress-top">
+                                        <span class="topic-progress-label">Progress</span>
+                                        <span class="topic-progress-summary">
+                                            {{ tp.completed }} / {{ tp.total }} checkers ({{ tp.percent }}%)
+                                        </span>
+                                    </div>
+                                    <div class="topic-progress-bar">
+                                        <div class="topic-progress-bar-fill" style="width: {{ tp.percent }}%;"></div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p class="page-intro">No checkers defined for this topic yet.</p>
+                            {% endif %}
+
+                            <div class="progress-card-actions">
+                                <a href="{% url 'curriculum:topic-detail' slug=tp.topic.slug %}" class="btn-secondary">
+                                    Open topic
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No topics in this category yet.</p>
+            {% endif %}
+        </section>
+    {% empty %}
+        <p>No topics found in the curriculum.</p>
+    {% endfor %}
+{% endblock %}
