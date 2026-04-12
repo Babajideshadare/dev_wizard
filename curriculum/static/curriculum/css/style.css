@@ -39,9 +39,9 @@ a:hover {
 /* ---------- Layout ---------- */
 
 .container {
-    max-width: 1200px;           /* wider, more professional layout */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;             /* a bit more horizontal padding */
+    padding: 0 24px;
 }
 
 .page-main {
@@ -63,7 +63,7 @@ a:hover {
 }
 
 .nav-inner {
-    max-width: 1200px;           /* match main content width */
+    max-width: 1200px;
     margin: 0 auto;
     padding: 12px 24px;
     display: flex;
@@ -108,18 +108,16 @@ p {
 
 .home-layout {
     display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);   /* wider sidebar, more defined columns */
+    grid-template-columns: 320px minmax(0, 1fr);
     gap: 24px;
     align-items: flex-start;
     margin-top: 8px;
 }
 
 .home-sidebar {
-    /* Sidebar sits flush with container's left edge */
 }
 
 .home-main {
-    /* main curriculum content uses the remaining space */
 }
 
 /* ---------- Cards & grids ---------- */
@@ -258,7 +256,7 @@ p {
 }
 
 .checker-card > summary::-webkit-details-marker {
-    display: none;
+    display:none;
 }
 
 .checker-header-title {
@@ -267,7 +265,7 @@ p {
     font-size: 0.9rem;
 }
 
-/* Checker list inside the checker card */
+/* Checker list items with toggles */
 
 .checker-list {
     margin-top: 0;
@@ -275,20 +273,44 @@ p {
     font-size: 0.9rem;
 }
 
-.checker-list li {
-    margin-bottom: 4px;
-    position: relative;
-    padding-left: 1.1rem;
+.checker-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
 }
 
-/* Custom bullet for checkers */
-.checker-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: 0.2rem;
-    font-size: 0.8rem;
-    color: var(--accent);
+.checker-toggle {
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    border: 1px solid var(--border-card);
+    background-color: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.checker-toggle.completed {
+    background-color: #dcfce7;   /* light green-ish */
+    border-color: #22c55e;       /* green-500 */
+    color: #166534;              /* green-700 */
+}
+
+.checker-toggle:hover {
+    filter: brightness(0.98);
+}
+
+.checker-text {
+    flex: 1;
+}
+
+.checker-text-completed {
+    color: var(--text-muted);
+    text-decoration: line-through;
 }
 
 /* ---------- General lists ---------- */

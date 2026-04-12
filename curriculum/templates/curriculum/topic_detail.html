@@ -32,7 +32,11 @@
     {% if tasks %}
         <div class="task-list">
             {% for task in tasks %}
-                <details class="task-card">
+                {% if open_task_id and open_task_id == task.id %}
+                    <details class="task-card" open>
+                {% else %}
+                    <details class="task-card">
+                {% endif %}
                     <summary>
                         <span class="task-header-title">{{ task.title }}</span>
                         <span class="task-header-indicator">▼</span>
@@ -43,22 +47,38 @@
                         {% endif %}
 
                         {% with checkers=task.checkers.all %}
-                        {% if checkers %}
-        <details class="checker-card">
-            <summary>
-                <span class="checker-header-title">
-                    Checkers ({{ checkers|length }})
-                </span>
-                <span class="task-header-indicator">▼</span>
-            </summary>
-            <ul class="checker-list">
-                {% for checker in checkers %}
-                    <li>{{ checker.description }}</li>
-                {% endfor %}
-            </ul>
-        </details>
-    {% endif %}
-{% endwith %}
+                            {% if checkers %}
+                                {% if open_task_id and open_task_id == task.id %}
+                                    <details class="checker-card" open>
+                                {% else %}
+                                    <details class="checker-card">
+                                {% endif %}
+                                    <summary>
+                                        <span class="checker-header-title">
+                                            Checkers ({{ checkers|length }})
+                                        </span>
+                                        <span class="task-header-indicator">▼</span>
+                                    </summary>
+                                    <ul class="checker-list">
+                                        {% for checker in checkers %}
+                                            <li id="checker-{{ checker.id }}" class="checker-item">
+                                                <form method="post" action="{% url 'curriculum:toggle-checker' checker.id %}">
+                                                    {% csrf_token %}
+                                                    <button
+                                                        type="submit"
+                                                        class="checker-toggle {% if checker.id in completed_checker_ids %}completed{% endif %}">
+                                                        {% if checker.id in completed_checker_ids %}✓{% else %}○{% endif %}
+                                                    </button>
+                                                </form>
+                                                <span class="checker-text {% if checker.id in completed_checker_ids %}checker-text-completed{% endif %}">
+                                                    {{ checker.description }}
+                                                </span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </details>
+                            {% endif %}
+                        {% endwith %}
                     </div>
                 </details>
             {% endfor %}
