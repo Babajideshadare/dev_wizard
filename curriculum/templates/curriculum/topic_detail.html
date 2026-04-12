@@ -29,6 +29,22 @@
     </div>
 
     <h2>Tasks</h2>
+
+    {% if total_checkers > 0 %}
+        <div class="topic-progress">
+            <div class="topic-progress-top">
+                <span class="topic-progress-label">Progress</span>
+                <span class="topic-progress-summary">
+                    {{ completed_checkers }} / {{ total_checkers }} checkers completed
+                    ({{ progress_percent }}%)
+                </span>
+            </div>
+            <div class="topic-progress-bar">
+                <div class="topic-progress-bar-fill" style="width: {{ progress_percent }}%;"></div>
+            </div>
+        </div>
+    {% endif %}
+
     {% if tasks %}
         <div class="task-list">
             {% for task in tasks %}

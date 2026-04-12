@@ -43,15 +43,13 @@ def category_detail(request, slug):
 def topic_detail(request, slug):
     """
     Topic detail page: show one Topic, its Objectives, and its Tasks (with Checkers).
-    User must be logged in to access this page.
-    Also includes per-user checker completion status, and can keep a specific
-    task/checker section open based on query params.
+    Includes per-user checker completion status and a topic-level progress summary.
     """
     topic = get_object_or_404(Topic, slug=slug)
     objectives = topic.objectives.all().order_by("order", "id")
     tasks = topic.tasks.all().prefetch_related("checkers").order_by("order", "id")
 
-    # Load this user's progress for all checkers under this topic
+    # Completed checkers for this user on this topic
     progress_qs = UserCheckerProgress.objects.filter(
         user=request.user,
         checker__task__topic=topic,
@@ -60,6 +58,15 @@ def topic_detail(request, slug):
     completed_checker_ids = list(
         progress_qs.values_list("checker_id", flat=True)
     )
+    completed_checkers = len(completed_checker_ids)
+
+    # Total checkers in this topic
+    total_checkers = Checker.objects.filter(task__topic=topic).count()
+
+    if total_checkers > 0:
+        progress_percent = int((completed_checkers / total_checkers) * 100)
+    else:
+        progress_percent = 0
 
     # Determine which task (and its checker section) should be open
     open_task_id = request.GET.get("open_task")
@@ -77,6 +84,9 @@ def topic_detail(request, slug):
         "tasks": tasks,
         "completed_checker_ids": completed_checker_ids,
         "open_task_id": open_task_id,
+        "total_checkers": total_checkers,
+        "completed_checkers": completed_checkers,
+        "progress_percent": progress_percent,
     }
     return render(request, "curriculum/topic_detail.html", context)
 

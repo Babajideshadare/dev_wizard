@@ -114,12 +114,6 @@ p {
     margin-top: 8px;
 }
 
-.home-sidebar {
-}
-
-.home-main {
-}
-
 /* ---------- Cards & grids ---------- */
 
 .card-grid {
@@ -179,7 +173,45 @@ p {
     margin-bottom: 24px;
 }
 
-/* Task list as accordions */
+/* Topic-level progress summary */
+
+.topic-progress {
+    margin: 12px 0 20px;
+}
+
+.topic-progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+.topic-progress-label {
+    font-weight: 600;
+}
+
+.topic-progress-summary {
+    color: var(--text-muted);
+}
+
+.topic-progress-bar {
+    position: relative;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: #e5e7eb;   /* gray-200 */
+    overflow: hidden;
+}
+
+.topic-progress-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background-color: var(--accent);  /* gray-600 */
+    width: 0;
+    transition: width 0.2s ease-out;
+}
+
+/* ---------- Task list as accordions ---------- */
 
 .task-list {
     display: flex;
@@ -256,7 +288,7 @@ p {
 }
 
 .checker-card > summary::-webkit-details-marker {
-    display:none;
+    display: none;
 }
 
 .checker-header-title {
